@@ -1,0 +1,42 @@
+<div id="custom-form">
+   <form class="contact custom" 
+         action="<?php echo $this->getUrl('crud/index/save', ['_secure' => true]);?>"
+         id="custom-form"
+         method="post"
+         data-hasrequired="<?php  echo __('* Required Fields') ?>"
+         data-mage-init='{"validation":{}}'>
+ 
+        <fieldset class="fieldset">  
+            <div class="field name required">
+                <label class="label" for="name"><span><?php  echo __('Name') ?></span></label>
+                <div class="control">
+                    <input name="name" id="name" title="<?php  echo __('Name') ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                </div>
+            </div>
+            
+            <div class="field created at required">
+                <label class="label" for="created_at"><span><?php  echo __('Created At') ?></span></label>
+                <div class="control">
+                    <input name="created_at" id="created_at" title="<?php  echo __('Created At') ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                </div>
+            </div>
+            <div class="field updated at required">
+                <label class="label" for="updated_at"><span><?php  echo __('Updated At') ?></span></label>
+                <div class="control">
+                    <input name="updated_at" id="updated_at" title="<?php  echo __('Updated At') ?>" class="input-text" type="text"/>
+                </div>
+            </div>
+        </fieldset>
+    
+        <div class="actions-toolbar">
+            <div class="primary">
+                <input type="hidden" name="hideit" id="hideit" value="" />
+                <button type="submit" title="<?php  echo __('Submit') ?>" class="action submit primary" id="custom_btn">
+                    <span><?php  echo __('Submit') ?></span>
+                </button>
+            </div>
+        </div>
+   </form>
+</div>
+
+

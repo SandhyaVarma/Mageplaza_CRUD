@@ -1,0 +1,58 @@
+<a class="action primary" href="<?php echo $block->getUrl('crud/index/insert');?> ">Add Record</a>
+
+<table>
+     <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th colspan="2">Action</th>
+     </tr>
+ 
+     <?php
+          $collection = $block->getResult();
+          foreach($collection as $item){
+     ?>
+     <tr>
+          <td><?php echo $item->getPostId(); ?></td>
+          <td><?php echo $item->getData('name'); ?></td>
+          <td><?php echo $item->getData('created_at'); ?></td>
+          <td><?php echo $item->getData('updated_at'); ?></td>
+          <td><a href="<?php echo $block->getUrl('crud/index/edit').'id/'.$item->getData('post_id'); ?>" class="action primary">Edit</a></td>
+          <td><a href="<?php echo $block->getUrl('crud/index/delete').'?id='.$item->getData('post_id'); ?>" class="action primary">Delete</a></td>
+     </tr>
+     <?php } ?>
+</table>
+<br><br>
+
+<h2>Customer Table</h2>
+
+<a class="action primary" href="<?php echo $block->getUrl('crud/index/insertcustomer');?> ">Add Record</a>
+<table>
+    <tr>
+        <th><?= __('Id'); ?></th>
+        <th><?= __('Name'); ?></th>
+        <th><?= __('Email'); ?></th>
+        <th><?= __('Created At'); ?></th>
+        <th><?= __('Updated At'); ?></th>
+        <th colspan="2"><?= __('Action'); ?></th>
+    </tr>
+    <?php
+        $collectionData = $block->getResultData();
+        foreach($collectionData as $collection):
+    ?>
+    <tr>
+        <td><?= $collection->getId(); ?></td>
+        <td><?= $collection->getName(); ?></td>
+        <td><?= $collection->getEmail(); ?></td>
+        <td><?= $collection->getCreatedAt(); ?></td>
+        <td><?= $collection->getUpdatedAt(); ?></td>
+        <td>
+            <a href="<?= $block->getUrl('crud/index/editcustomer').'id/'.$collection->getId(); ?>" class="action primary">Edit</a>
+        </td>
+        <td>
+            <a href="<?= $block->getUrl('crud/index/deletecustomer').'?id='.$collection->getId(); ?>" class="action primary">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
