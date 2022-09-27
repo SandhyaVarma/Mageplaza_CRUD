@@ -10,7 +10,8 @@ $collection = $block->getCustomerEditRecord();
          data-hasrequired="<?php  echo __('* Required Fields') ?>"
          data-mage-init='{"validation":{}}'>
          
- 
+         <input type="hidden" name="editId" id="editId" value="<?= $collection['id']; ?>" />
+
         <fieldset class="fieldset">
             <div class="field name required">
                 <label class="label" for="name"><span><?php  echo __('Name') ?></span></label>

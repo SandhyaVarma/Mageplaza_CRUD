@@ -9,7 +9,8 @@ $collection = $block->getEditRecord();
          method="post"
          data-hasrequired="<?php  echo __('* Required Fields') ?>"
          data-mage-init='{"validation":{}}'>
-         
+        
+         <input type="hidden" name="editRecordId" id="editRecordId" value="<?= $collection['post_id']; ?>" />
  
         <fieldset class="fieldset">
             <div class="field name required">
