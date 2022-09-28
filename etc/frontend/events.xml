@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mageplaza_crud_form_data">
+        <observer name="form_data" instance="Mageplaza\CRUD\Observer\GetFormData" />
+    </event>
+</config>

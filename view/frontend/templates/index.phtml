@@ -1,58 +1,118 @@
-<a class="action primary" href="<?php echo $block->getUrl('crud/index/insert');?> ">Add Record</a>
-
-<table>
-     <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Created At</th>
-          <th>Updated At</th>
-          <th colspan="2">Action</th>
-     </tr>
- 
-     <?php
-          $collection = $block->getResult();
-          foreach($collection as $item){
-     ?>
-     <tr>
-          <td><?php echo $item->getPostId(); ?></td>
-          <td><?php echo $item->getData('name'); ?></td>
-          <td><?php echo $item->getData('created_at'); ?></td>
-          <td><?php echo $item->getData('updated_at'); ?></td>
-          <td><a href="<?php echo $block->getUrl('crud/index/edit').'id/'.$item->getData('post_id'); ?>" class="action primary">Edit</a></td>
-          <td><a href="<?php echo $block->getUrl('crud/index/delete').'?id='.$item->getData('post_id'); ?>" class="action primary">Delete</a></td>
-     </tr>
-     <?php } ?>
-</table>
-<br><br>
-
-<h2>Customer Table</h2>
-
-<a class="action primary" href="<?php echo $block->getUrl('crud/index/insertcustomer');?> ">Add Record</a>
-<table>
-    <tr>
-        <th><?= __('Id'); ?></th>
-        <th><?= __('Name'); ?></th>
-        <th><?= __('Email'); ?></th>
-        <th><?= __('Created At'); ?></th>
-        <th><?= __('Updated At'); ?></th>
-        <th colspan="2"><?= __('Action'); ?></th>
-    </tr>
+<?php
+// get custom data
+$custom_data = $block->getCustomData();
+$customer_data = $block->getCustomerData();
+?>
+<fieldset class="fieldset">
     <?php
-        $collectionData = $block->getResultData();
-        foreach($collectionData as $collection):
-    ?>
-    <tr>
-        <td><?= $collection->getId(); ?></td>
-        <td><?= $collection->getName(); ?></td>
-        <td><?= $collection->getEmail(); ?></td>
-        <td><?= $collection->getCreatedAt(); ?></td>
-        <td><?= $collection->getUpdatedAt(); ?></td>
-        <td>
-            <a href="<?= $block->getUrl('crud/index/editcustomer').'id/'.$collection->getId(); ?>" class="action primary">Edit</a>
-        </td>
-        <td>
-            <a href="<?= $block->getUrl('crud/index/deletecustomer').'?id='.$collection->getId(); ?>" class="action primary">Delete</a>
-        </td>
-    </tr>
-    <?php endforeach; ?>
-</table>
+    if (count($custom_data)) {
+        ?>
+        <div class="table-wrapper custom-data ">
+            <table class="data table table-data-items ">
+                <h1> Post Table </h1><br>
+                 <a class="action primary" href="<?php echo $block->getUrl('crud/index/insert');?> ">Add Record</a><br><br>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col id"><?= $block->escapeHtml('Id') ?></th>
+                        <th scope="col" class="col name"><?= $block->escapeHtml('Name') ?></th>
+                        <th scope="col" class="col created_at"><?= $block->escapeHtml('Created At') ?></th>
+                        <th scope="col" class="col updated_at"><?= $block->escapeHtml('Updated At') ?></th>
+                        <th scope="col" class="col updated_at"><?= $block->escapeHtml('Action') ?></th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($custom_data as $item): ?>
+                    <tr>
+                        <td data-th="Id" class="col name">
+                         <span><?= $block->escapeHtml($item->getPostId()) ?></span>
+                        </td>
+                        <td data-th="Name" class="col name">
+                         <span><?= $block->escapeHtml($item->getName()) ?></span>
+                        </td>
+                        <td data-th="Orders" class="col orders">
+                            <span><?= $block->escapeHtml($item->getCreatedAt()) ?></span>
+                        </td>
+                        <td data-th="Items" class="col orderitem">
+                            <span><?= $block->escapeHtml($item->getUpdatedAt()) ?></span>
+                        </td>
+                        <td><a href="<?php echo $block->getUrl('crud/index/edit').'id/'.$item->getData('post_id'); ?>" class="action primary">Edit</a></td>
+                        <td><a href="<?php echo $block->getUrl('crud/index/delete').'?id='.$item->getData('post_id'); ?>" class="action primary">Delete</a></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php if ($block->getPagerHtml()): ?>
+                <div class="order-products-toolbar toolbar bottom">
+                    <?= $block->getPagerHtml() ?>
+                </div>
+        <?php endif ?>
+    <?php } else { ?>
+                <div class="message info empty">
+                    <span><?= $block->escapeHtml('You have no data in table.') ?></span>
+                </div>
+    <?php  } ?>
+</fieldset>
+
+<br>
+<fieldset class="fieldset">
+    <?php
+    if (count($customer_data)) {
+        ?>
+        <div class="table-wrapper custom-data ">
+            <table class="data table table-data-items ">
+                <h1> Customer Table </h1><br>
+                 <a class="action primary" href="<?php echo $block->getUrl('crud/index/insertcustomer');?> ">Add Record</a><br><br>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col id"><?= $block->escapeHtml('Id') ?></th>
+                        <th scope="col" class="col name"><?= $block->escapeHtml('Name') ?></th>
+                        <th scope="col" class="col name"><?= $block->escapeHtml('Email') ?></th>
+                        <th scope="col" class="col created_at"><?= $block->escapeHtml('Created At') ?></th>
+                        <th scope="col" class="col updated_at"><?= $block->escapeHtml('Updated At') ?></th>
+                        <th scope="col" class="col updated_at"><?= $block->escapeHtml('Action') ?></th>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($customer_data as $item): ?>
+                    <tr>
+                        <td data-th="Id" class="col name">
+                         <span><?= $block->escapeHtml($item->getId()) ?></span>
+                        </td>
+                        <td data-th="Name" class="col name">
+                         <span><?= $block->escapeHtml($item->getName()) ?></span>
+                        </td>
+                        <td data-th="Email" class="col name">
+                         <span><?= $block->escapeHtml($item->getEmail()) ?></span>
+                        </td>
+                        <td data-th="Orders" class="col orders">
+                            <span><?= $block->escapeHtml($item->getCreatedAt()) ?></span>
+                        </td>
+                        <td data-th="Items" class="col orderitem">
+                            <span><?= $block->escapeHtml($item->getUpdatedAt()) ?></span>
+                        </td>
+                        <td><a href="<?= $block->getUrl('crud/index/editcustomer').'id/'.$item->getId(); ?>" class="action primary">Edit</a>
+                        </td>
+                        <td>
+                        <a href="<?= $block->getUrl('crud/index/deletecustomer').'?id='.$item->getId(); ?>" class="action primary">Delete</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <?php if ($block->getCustomerPagerHtml()): ?>
+                <div class="order-products-toolbar toolbar bottom">
+                    <?= $block->getCustomerPagerHtml() ?>
+                </div>
+        <?php endif ?>
+        <?php } else { ?>
+                <div class="message info empty">
+                    <span><?= $block->escapeHtml('You have no data in table.') ?></span>
+                </div>
+    <?php  } ?>
+</fieldset>
+
+

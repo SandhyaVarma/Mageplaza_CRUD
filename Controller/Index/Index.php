@@ -1,6 +1,8 @@
 <?php
 namespace Mageplaza\CRUD\Controller\Index;
 
+use Magento\Framework\Controller\ResultFactory;
+
 class Index extends \Magento\Framework\App\Action\Action
 {
 	protected $_pageFactory;
@@ -13,7 +15,11 @@ class Index extends \Magento\Framework\App\Action\Action
 	}
 
 	public function execute()
-	{
-		return $this->_pageFactory->create();
+	{	
+		$resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $resultPage = $this->_pageFactory->create();
+        $resultPage->getConfig()->getTitle()->set(__('CRUD Operation'));
+        return $resultPage;
+	
 	}
 }

@@ -2,6 +2,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
  
     <referenceContainer name="content">
-        <block class="Mageplaza\CRUD\Block\Insertcustomer" name="crud_index_insert" template="Mageplaza_CRUD::customerInsert.phtml" cacheable="false" />
+        <block class="Mageplaza\CRUD\Block\Insert" name="crud_index_insert" template="Mageplaza_CRUD::customerInsert.phtml" cacheable="false" />
     </referenceContainer>
 </page>

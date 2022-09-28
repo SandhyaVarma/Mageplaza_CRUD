@@ -3,4 +3,5 @@
     <referenceContainer name="content">
         <block class="Mageplaza\CRUD\Block\Index" name="crud_index_index" template="Mageplaza_CRUD::index.phtml" />
     </referenceContainer>
+    
 </page>

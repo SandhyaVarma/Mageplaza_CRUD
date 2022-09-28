@@ -1,19 +1,23 @@
 <?php
  
 namespace Mageplaza\CRUD\Controller\Index;
+use Magento\Framework\Event\ManagerInterface as EventManager;
  
 class Save extends \Magento\Framework\App\Action\Action
 {
      protected $_pageFactory;
      protected $_postFactory;
+     protected $_eventManager;
  
      public function __construct(
           \Magento\Framework\App\Action\Context $context,
           \Magento\Framework\View\Result\PageFactory $pageFactory,
-          \Mageplaza\CRUD\Model\PostFactory $postFactory
+          \Mageplaza\CRUD\Model\PostFactory $postFactory,
+          EventManager $eventManager
      ){
           $this->_pageFactory = $pageFactory;
           $this->_postFactory = $postFactory;
+          $this->_eventManager = $eventManager;
           return parent::__construct($context);
      }
  
@@ -37,6 +41,7 @@ class Save extends \Magento\Framework\App\Action\Action
                          $post->setData($input)->save();
                     }
                     $this->messageManager->addSuccessMessage("Data added successfully!");
+                    $this->_eventManager->dispatch('mageplaza_crud_form_data', ['posts' => $input]);
                     return $this->_redirect('crud/index/index');
                }
           }catch(\Exception $e){
