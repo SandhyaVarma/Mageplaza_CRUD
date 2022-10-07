@@ -2,7 +2,19 @@
 // get custom data
 $custom_data = $block->getCustomData();
 $customer_data = $block->getCustomerData();
+
 ?>
+
+<div class="wrap">
+   <div class="search">
+      <input type="text" class="searchTerm" id="quick-search" placeholder="Search">
+   </div>
+</div>
+<br>
+
+<div id="list"></div>
+<br>
+
 <fieldset class="fieldset">
     <?php
     if (count($custom_data)) {
@@ -114,5 +126,33 @@ $customer_data = $block->getCustomerData();
                 </div>
     <?php  } ?>
 </fieldset>
+
+<script>
+    require([
+        'jquery'
+],
+function ($) {
+    $('#quick-search').keyup(function(){
+            var search_text = jQuery("#quick-search").val();
+            try {
+                    jQuery.ajax({
+                        url : '<?php echo $block->getUrl('crud/index/search') ?>',
+                        dataType : 'json',
+                        data: { 'search_text' :  search_text  },
+                        type : 'post',
+                        success : function(data) {
+                            // console.log(data);
+                           $("#list").html('');
+                           $.each(data.data,function(key,value){
+                           $('#list').append(value.name+"<br>")
+                           })
+                        }
+                    });
+                } catch (e) {
+                }
+        });
+    });
+</script>
+
 
 
